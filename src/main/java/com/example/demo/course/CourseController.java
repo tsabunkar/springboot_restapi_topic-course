@@ -1,4 +1,6 @@
 package com.example.demo.course;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +16,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RestController
 public class CourseController {
 
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(CourseController.class);
+	
 	@Autowired
 	private CourseService courseService;
 	
 	@RequestMapping(path="/topics/{topicId}/courses",method =RequestMethod.GET)
 	public List<Course> getAllCourses(@PathVariable("topicId") int topicId) {
+		LOGGER.debug("user has pinged to getAll method", topicId );
 		return courseService.getCourses(topicId);
 				
 	}
